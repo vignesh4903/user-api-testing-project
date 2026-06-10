@@ -99,6 +99,78 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "New Request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"resource is updated succesfully\",function(){\r",
+              "        pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "pm.test(\"id exist\",function(){\r",
+              "        pm.expect(jsonData.id).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"id matches\",function(){\r",
+              "        pm.expect(jsonData.id).to.eql(1);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"name matches\",function(){\r",
+              "    pm.expect(jsonData.name).to.eql(\"Vignesh Kumar\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"name exist\", function(){\r",
+              "    pm.expect(jsonData.name).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"email exist\",function(){\r",
+              "    pm.expect(jsonData.email).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"email matches\",function(){\r",
+              "    pm.expect(jsonData.email).to.eql(\"vigneshkumar@test.com\");\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Vignesh Kumar\",\r\n    \"email\": \"vigneshkumar@test.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/users/1",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "users",
+            "1"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
